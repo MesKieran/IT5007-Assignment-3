@@ -1,0 +1,37 @@
+scalar GraphQLDate
+
+type Ticket {
+  _id: ID!
+  id: Int!
+  name: String!
+  phone: Int!
+  bookingTime: GraphQLDate!
+}
+
+input InputTicket {
+  name: String!
+  phone: Int!
+  bookingTime: GraphQLDate!
+}
+
+type Blacklisted {
+  _id: ID!
+  name: String!
+  phone: Int!
+}
+
+input InputBlacklist {
+  name: String!
+  phone: Int!
+}
+
+type Query {
+  listTravellers: [Ticket]!
+  listBlacklisted: [Blacklisted]! # Query to list all blacklisted individuals
+}
+
+type Mutation {
+  addTraveller(ticket: InputTicket!): Ticket!
+  deleteTraveller(travellername: String!): Boolean!
+  blacklistTraveller(blacklist: InputBlacklist!): Blacklisted! # Mutation to add a traveler to the blacklist
+}
